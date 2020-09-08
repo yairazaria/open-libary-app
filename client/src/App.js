@@ -4,6 +4,7 @@ import { Switch, Route } from "react-router-dom";
 import { Collections } from "./pages/Collections";
 import { BooksSearch } from "./pages/BooksSearch";
 import { Header } from "./components/Header";
+import BooksList from "./components/BooksList/BooksList";
 
 const App = () => {
   return (
@@ -22,6 +23,13 @@ const App = () => {
             exact
             path="/collections"
             render={(props) => (<Collections {...props}/>)}
+          />
+          <Route
+            exact
+            path="/bookslist"
+            render={(props) => (
+              <BooksList {...props} />
+            )}
           />
           <Route
             path="/"
