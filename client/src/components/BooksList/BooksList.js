@@ -9,7 +9,7 @@ const BooksList = ({ books = [] }) => {
       <h1 className={styles.books_list_title}>Search Result</h1>
       <div className={styles.books_list}>
         {books.map((book) => (
-          <BookItem book={book} key={book.key} />
+          <BookItem book={book} key={book.key} books={books}/>
         ))}
       </div>
     </Fragment>

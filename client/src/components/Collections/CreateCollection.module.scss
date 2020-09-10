@@ -1,4 +1,7 @@
 .add_collection_container{
+    .label{
+      margin-right: 10px;
+    }
     margin-left: 40px;
     .add_collection_input{
       height: 20px;
@@ -9,4 +12,5 @@
       color: #07bc0c;
       margin-left: 10px;
     }
+    
 }

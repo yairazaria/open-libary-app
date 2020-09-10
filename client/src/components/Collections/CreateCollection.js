@@ -39,7 +39,7 @@ export const CreateCollection = ({ setCollections, collections }) => {
 
   return (
     <div className={styles.add_collection_container}>
-      <label> Add New Collection</label>
+      <label className={styles.label}> Add New Collection</label>
       <Fragment>
         <input
           type="text"

@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import * as style from "./Collections.module.scss";
 import { CreateCollection } from "../../components/Collections/CreateCollection";
 import { getCollections } from '../../utils/utils';
+import { CollectionItem }  from "./CollectionItem";
 
 
 export const Collections = () => {
@@ -27,6 +28,11 @@ export const Collections = () => {
         setCollections={setCollections}
         collections={collections}
         />
+      </div>
+      <div className={style.collections_container}>
+       {collections.map((collection) => (
+      <CollectionItem  key={collection.id} setCollections={setCollections} collections={collections} collection={collection}/>
+      ))} 
       </div>
     </section>
   );
