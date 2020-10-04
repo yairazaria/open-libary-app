@@ -1,31 +1,20 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBookMedical } from "@fortawesome/free-solid-svg-icons";
 
 import * as styles from "./BookItem.module.scss";
 import { CoverImage } from "../CoverImage/CoverImage";
-import { getCollections } from "../../utils/utils";
 import { AddToast } from "../Toast/AddToast";
 
-const BookItem = ({ book, books }) => {
+const BookItem = ({ book, books, collections, setCollections }) => {
   const [hideSelectList, showSelectList] = useState(false);
   const [collectionSelected, setCollectionSelected] = useState("");
-  const [collections, setCollections] = useState([]);
-
-  const setCollectionsFormStorage = () => {
-    const collectionStorage = getCollections();
-    if (collectionStorage.length < 0) return;
-    else setCollections(collectionStorage);
-  };
-
-  useEffect(() => {
-    setCollectionsFormStorage();
-  }, []);
 
   const addBookToCollection = (e, bookKey) => {
     const selectedValue = e.target.value;
     if (collections.length < 0)
       return AddToast(false, "Create Collection First ");
+
     const collectionToAdd = collections.find((c) => c.id === selectedValue);
 
     const bookToAdd = books.find((b) => b.key === bookKey);
@@ -34,11 +23,11 @@ const BookItem = ({ book, books }) => {
     const isBookAlreadyInCollection = collectionToAdd.books.some(
       (b) => b.key === bookKey
     );
+
     if (isBookAlreadyInCollection)
       return AddToast(false, "Book Already Exist In Collection ");
 
     collectionToAdd.books.push(bookToAdd);
-    setCollections();
     localStorage.setItem("collections", JSON.stringify(collections));
     showSelectList(false);
     AddToast(
