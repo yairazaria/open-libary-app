@@ -1,17 +1,19 @@
 import React, { Fragment, useState, useEffect } from "react";
 
-import * as style from "./BookItem.module.scss";
+import * as style from "./BooksFilterPanel.module.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faFilter } from "@fortawesome/free-solid-svg-icons";
 
 export const BooksFilterPanel = ({
   booksList,
   setFilterBooksList,
   setFilterMode,
-  isFetching,
 }) => {
   const [authorInputValue, setAuthorInputValue] = useState("");
+  const [filterToggle, setFilterToggle] = useState(false);
   const [publicationYear, setPublicationYear] = useState({
-    from: 0,
-    to: 0,
+    from: "",
+    to: "",
   });
 
   useEffect(() => {
@@ -31,6 +33,7 @@ export const BooksFilterPanel = ({
           book.first_publish_year || (book.publish_date && book.publish_date[0])
         );
         let isMatched = false;
+
         if (
           publisYear &&
           authorName &&
@@ -41,6 +44,7 @@ export const BooksFilterPanel = ({
           isMatched = authorName
             .toLowerCase()
             .includes(authorInputValue.toLowerCase());
+
           if (
             publisYear >= Number(from) &&
             publisYear <= Number(to) &&
@@ -51,13 +55,11 @@ export const BooksFilterPanel = ({
           isMatched = authorName
             .toLowerCase()
             .includes(authorInputValue.toLowerCase());
+
           if (isMatched) return book;
         }
       });
-      console.log(filterdBooks, "filterdBooks");
       return setFilterBooksList(filterdBooks);
-    } else {
-      console.log("bad");
     }
   };
 
@@ -71,54 +73,66 @@ export const BooksFilterPanel = ({
   };
 
   const shouldFilterByYears = () => {
-    if (publicationYear.to > 0 && publicationYear.from > 0) {
-      return true;
-    }
+    if (publicationYear.to > 0 && publicationYear.from > 0) return true;
     return false;
+  };
+
+  const handleFilterChange = () => {
+    if (!filterToggle) setFilterToggle(true);
+    else setFilterToggle(false);
   };
 
   return (
     <Fragment>
-      <label>Filter By :</label>
-      <div className={style.panel_container}>
-        <div className={style.input_group}>
-          <label>Author Name</label>
+      <div className={style.button_container}>
+        <button onClick={handleFilterChange}>
+          <FontAwesomeIcon icon={faFilter} />
+          Filter
+        </button>
+      </div>
+      <div
+        className={
+          filterToggle
+            ? style.hide_edit_filter_container
+            : style.edit_filter_container
+        }
+      >
+        <div className={style.author_input}>
+          <label>Author Name :</label>
           <input
             className={style.filter_input}
             type="text"
+            placeholder="Author Name"
             value={authorInputValue}
             onChange={(e) => handleOnChange(e)}
           />
         </div>
-        <div>
-          <label>Years Range</label>
-          <div className={style.input_group}>
-            <label>from</label>
+        <div className={style.years_range_container}>
+          <label>Years Range :</label>
+          <div className={style.years_range_inputs}>
             <input
-              className={style.filter_input}
               type="number"
               name="from"
               placeholder="from"
               value={publicationYear.from}
               onChange={(e) => handleYearsChange(e)}
             />
-          </div>
-          <div className={style.input_group}>
-            <label>to</label>
             <input
               type="number"
               name="to"
               placeholder="to"
               value={publicationYear.to}
               onChange={(e) => handleYearsChange(e)}
-              className={style.filter_input}
             />
           </div>
-
-          <button onClick={authorFilter} disabled={!shouldFilterByYears()}>
-            apply years
-          </button>
         </div>
+        <button
+          className={style.apply_button}
+          onClick={authorFilter}
+          disabled={!shouldFilterByYears()}
+        >
+          apply
+        </button>
       </div>
     </Fragment>
   );

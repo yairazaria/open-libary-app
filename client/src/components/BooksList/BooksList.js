@@ -19,7 +19,6 @@ const BooksList = ({ books = [] }) => {
 
   return (
     <Fragment>
-      <h1 className={styles.books_list_title}>Search Result</h1>
       <div className={styles.books_list}>
         {books.map((book) => (
           <BookItem

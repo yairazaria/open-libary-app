@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
@@ -71,14 +71,18 @@ export const BooksSearch = () => {
           />
         </div>
       </div>
-      <BooksFilterPanel
-        booksList={booksList}
-        setFilterBooksList={setFilterBooksList}
-        setFilterMode={setFilterMode}
-      />
+
       {!isFetching ? (
         shouldDisplayBookList ? (
-          <BooksList books={isFilterMode ? filterBooksList : booksList} />
+          <Fragment>
+            <h1 className={styles.books_list_title}>Search Result</h1>
+            <BooksFilterPanel
+              booksList={booksList}
+              setFilterBooksList={setFilterBooksList}
+              setFilterMode={setFilterMode}
+            />
+            <BooksList books={isFilterMode ? filterBooksList : booksList} />
+          </Fragment>
         ) : (
           noResult
         )

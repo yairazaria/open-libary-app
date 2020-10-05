@@ -1,0 +1,73 @@
+.edit_filter_container {
+  display: flex;
+  justify-content: space-between;
+  font-family: sans-serif;
+  line-height: 1.15;
+  font-size: 14px;
+  background-color: #f2f3f5;
+  width: 28%;
+  position: relative;
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
+  transition: transform 0.1s ease, opacity 0.1s ease;
+  transform-origin: 0 0;
+  padding: 20px;
+}
+
+.hide_edit_filter_container {
+  transform: scale(0.5);
+  opacity: 0;
+  display: none;
+}
+
+.years_range_inputs{
+input{
+    margin-left:5px ;
+    width: 60px;
+    height: 20px;
+    border: 1px solid rgba(0, 0, 0, 0.125);
+}
+}
+
+
+.button_container {
+  button {
+    font-size: medium;
+    font-weight: 600;
+    color: white;
+    border-color: #ff7854;
+    border-radius: 0px 10px 2px 0px;
+    height: 50px;
+    width: 130px;
+    background-image: -webkit-linear-gradient(left, #ff7854 0%, #ff5079 100%);
+    svg{
+        padding-right: 5px;
+    }
+  }
+}
+
+
+.author_input {
+  label{
+    display: block;
+  }
+    .filter_input {
+        width: 120px;
+        height: 20px;
+      border: 1px solid rgba(0,0,0,0.125);
+    }
+}
+
+.apply_button{
+    background-color: #80B636;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 3px;
+    float: right;}
+
+@media only screen and (max-width: 768px) {
+    .edit_filter_container {
+      width: auto;
+      }
+  }
