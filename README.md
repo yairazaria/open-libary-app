@@ -5,7 +5,6 @@
 1. Make sure you have *Node.js* 10 or higher and *npm* 6 or higher installed.
 2. Before starting to run the local client or the local server on the first time, make sure to install packages by running `npm install` in the client/server folder. 
 3. To start the client `cd client && npm start`.
-4. To start server `cd server && npm start`.
 
  two main pages: 
 - books search
