@@ -28,7 +28,7 @@ export const BooksFilterPanel = ({
   const authorFilter = () => {
     if (authorInputValue.length > 2) {
       const filterdBooks = booksList.filter((book) => {
-        const authorName = book.author_name && book.author_name[0];
+        const authorName = book?.author_name[0];
         const publisYear = Number(
           book.first_publish_year || (book.publish_date && book.publish_date[0])
         );
@@ -63,24 +63,18 @@ export const BooksFilterPanel = ({
     }
   };
 
-  const handleYearsChange = (e) => {
-    setPublicationYear({ ...publicationYear, [e.target.name]: e.target.value });
-  };
+  const handleYearsChange = (e) => setPublicationYear({ ...publicationYear, [e.target.name]: e.target.value });
+
 
   const handleOnChange = (e) => {
     setAuthorInputValue(e.target.value);
     authorFilter();
   };
 
-  const shouldFilterByYears = () => {
-    if (publicationYear.to > 0 && publicationYear.from > 0) return true;
-    return false;
-  };
+  const shouldFilterByYears = () => publicationYear.to > 0 && publicationYear.from > 0;
 
-  const handleFilterChange = () => {
-    if (!filterToggle) setFilterToggle(true);
-    else setFilterToggle(false);
-  };
+  const handleFilterChange = () => !filterToggle ? setFilterToggle(true) : setFilterToggle(false);
+    
 
   return (
     <Fragment>

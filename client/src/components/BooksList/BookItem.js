@@ -5,6 +5,7 @@ import { faBookMedical } from "@fortawesome/free-solid-svg-icons";
 import * as styles from "./BookItem.module.scss";
 import { CoverImage } from "../CoverImage/CoverImage";
 import { AddToast } from "../Toast/AddToast";
+import { save } from "../../utils/utils";
 
 const BookItem = ({ book, books, collections, setCollections }) => {
   const [hideSelectList, showSelectList] = useState(false);
@@ -28,7 +29,7 @@ const BookItem = ({ book, books, collections, setCollections }) => {
       return AddToast(false, "Book Already Exist In Collection ");
 
     collectionToAdd.books.push(bookToAdd);
-    localStorage.setItem("collections", JSON.stringify(collections));
+    save("collections", collections)
     showSelectList(false);
     AddToast(
       true,

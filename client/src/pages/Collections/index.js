@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 
 import * as style from "./Collections.module.scss";
 import { CreateCollection } from "../../components/Collections/CreateCollection";
-import { getCollections } from '../../utils/utils';
+import { load, save } from '../../utils/utils';
 import { CollectionItem }  from "./CollectionItem";
 
 
@@ -11,12 +11,13 @@ export const Collections = () => {
   const [collections, setCollections] = useState([]);
 
   useEffect(() => {
-    const collectionFromStorge = getCollections();
-    setCollections(collectionFromStorge);
+    const collectionFromStorge = load("collections");
+    if (collectionFromStorge.length === 0) return;
+    setCollections(collectionFromStorge || []);
   }, []);
   
   useEffect(() => {
-    localStorage.setItem('collections', JSON.stringify(collections));
+    save('collections', collections)
   }, [collections]);
 
 

@@ -12,13 +12,13 @@ const App = () => {
       <Header />
       <main>
         <Switch>
-          <Route
+          {/* <Route
             exact
             path="/search"
             render={(props) => (
               <BooksSearch {...props} />
             )}
-          />
+          /> */}
           <Route
             exact
             path="/collections"

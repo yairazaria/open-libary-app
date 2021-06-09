@@ -33,15 +33,11 @@ export const CollectionItem = ({ collection, collections, setCollections }) => {
 
     if (isCollectionExist)
       return AddToast(
-        false,
         "This Collection Name is Exist, Try another name",
         "top-center"
       );
 
-    const newCollections = collections.map((c) => {
-      if (c.id === collection.id) return editedCollection;
-      return c;
-    });
+    const newCollections = collections.map((c) => c.id === collection.id ? editedCollection : c );
 
     setCollections(newCollections);
     setEditMode(false);
@@ -62,10 +58,7 @@ export const CollectionItem = ({ collection, collections, setCollections }) => {
       books,
     };
 
-    const newCollections = collections.map((c) => {
-      if (c.id === collection.id) return newEditedCollection;
-      return c;
-    });
+    const newCollections = collections.map((c) => c.id === collection.id ? newEditedCollection : c);
 
     setEditedCollection(newEditedCollection);
     setCollections(newCollections);
@@ -74,21 +67,24 @@ export const CollectionItem = ({ collection, collections, setCollections }) => {
   const moveBookFromCollection = (e, bookKey) => {
     const selectedValue = e.target.value;
 
-    if (collections.length < 0)
+    if (collections?.length < 0)
       return AddToast(false, "Create Collection First ");
+    
     const collectionToAdd = collections.find((c) => c.id === selectedValue);
+
+    const isBookAlreadyInCollection = collectionToAdd.books.some(
+        (b) => b.key === bookKey
+    );
+    if (isBookAlreadyInCollection)
+    return AddToast(false, "Book Already Exist In Collection ");
 
     const bookToMove = collection.books.find((b) => b.key === bookKey);
     if (!bookToMove) return AddToast(false, "Book Not Found :(");
 
-    const isBookAlreadyInCollection = collectionToAdd.books.some(
-      (b) => b.key === bookKey
-    );
-    if (isBookAlreadyInCollection)
-      return AddToast(false, "Book Already Exist In Collection ");
 
     const books = collection.books.filter((b) => b.key !== bookKey);
     collectionToAdd.books.push(bookToMove);
+   
     const newEditedCollection = {
       ...editedCollection,
       books,

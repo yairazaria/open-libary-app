@@ -1,10 +1,11 @@
-export const getCollections = () =>{
-    const collectionsFromStorge = JSON.parse(localStorage.getItem('collections'));
-    return collectionsFromStorge || [];
-};
+export const save = (key, data) => {
+   return localStorage.setItem(key, JSON.stringify(data)) || [];
+}
 
+export const load = (key) => {
+    return JSON.parse(localStorage.getItem(key)) || [];
+}
 
-export const getBooksList = () =>{
-    const booksListFromStorge = JSON.parse(localStorage.getItem('books'));
-    return booksListFromStorge || [];
-};
+export const clear = (key) => {
+    return localStorage.removeItem(key);
+}

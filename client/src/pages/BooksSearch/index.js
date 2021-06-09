@@ -4,7 +4,7 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
 import * as styles from "./BooksSearch.module.scss";
 import { searchBooks } from "../../BooksApi/index";
-import { getBooksList } from "../../utils/utils";
+import { save, load } from "../../utils/utils";
 import BooksList from "../../components/BooksList/BooksList";
 import Spinner from "../../components/Spinner/Spinner";
 import { BooksFilterPanel } from "../../components/BooksList/BooksFilterPanel";
@@ -18,18 +18,18 @@ export const BooksSearch = () => {
   const [resultNotFound, setResultNotFound] = useState("");
 
   useEffect(() => {
-    const booksListFromStorge = getBooksList();
-    if (booksListFromStorge.length < 0) return;
+    const booksListFromStorge = load('books');
+    if (booksListFromStorge.length === 0) return;
     setBooksList(booksListFromStorge);
   }, []);
 
   const getBooks = async (searchValue) => {
     const res = await searchBooks(searchValue);
-    if (res && res.docs && res.docs.length > 0) {
+    if (res?.docs?.length > 0) {
       const books = res.docs;
       setIsFetching(false);
       setBooksList(books);
-      localStorage.setItem("books", JSON.stringify(books));
+      save("books", books)
     } else {
       setIsFetching(false);
       setBooksList([]);
