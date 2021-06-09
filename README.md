@@ -20,3 +20,4 @@ As a user you able to do the following actions:
  - Delete collections.
  - Rename collections.
  - Search results sortable by publication year or title
+ 
