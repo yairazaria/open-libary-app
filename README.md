@@ -2,9 +2,8 @@
 
 
 ## Getting Started
-1. Make sure you have *Node.js* 10 or higher and *npm* 6 or higher installed.
-2. Before starting to run the local client or the local server on the first time, make sure to install packages by running `npm install` in the client/server folder. 
-3. To start the client `cd client && npm start`.
+1. Before starting to run the local client or the local server on the first time, make sure to install packages by running `npm install` in the client folder. 
+2. To start the client `cd client && npm start`.
 
  two main pages: 
 - books search
@@ -20,4 +19,4 @@ As a user you able to do the following actions:
  - Create new collections.
  - Delete collections.
  - Rename collections.
- - Search results sortable by publication year or title, if you have other ideas in mind go ahead and surprise us!
+ - Search results sortable by publication year or title
